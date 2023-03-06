@@ -199,10 +199,9 @@ export default class Game extends Phaser.Scene {
     poseTexture.drawFrame('leg2', 64)
     poseTexture.drawFrame('arm2', 64)
     poseTexture.drawFrame('clothing_top_2', 64, 0, 0, 1, this.color)
-    if (this.textures.exists('poseTexture')) this.textures.remove('poseTexture')
     poseTexture.saveTexture('poseTexture')
     
-    const poseSprite = this.make.sprite({key: 'poseTexture'}, true).setScale(4).setOrigin(0)
+    const poseSprite = this.make.sprite({key: 'poseTexture'}, false).setScale(4).setOrigin(0)
 
     const exportTexture0 = this.add.renderTexture(0, 0, img.width, img.height).setVisible(false)
     const exportTexture1 = this.add.renderTexture(0, 0, img.width, img.height).setVisible(false)
@@ -232,6 +231,17 @@ export default class Game extends Phaser.Scene {
       if (exportCount === 3) {
         console.log(exportResult)
         this.scale.setGameSize(1100, 700)
+        
+        img.destroy()
+        sprite.destroy()
+        poseTexture.destroy()
+        poseSprite.destroy()
+        exportTexture0.destroy()
+        exportTexture1.destroy()
+        exportTexture2.destroy()
+        exportTexture3.destroy()
+        exportTexture4.destroy()
+        this.textures.remove('poseTexture')
       }
     }
 
