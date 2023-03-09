@@ -11,70 +11,64 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    const bg = this.add.rectangle(0, 0, 1250, 700, 0xDDDDDD, 0.5)
+      .setOrigin(0)
+      .setStrokeStyle(10, 0x000000)
+
     this.createShirts()
 
     this.stamp = this.make.image({ key: 'tree' }, false).setScale(0.35).setOrigin(0)
 
-    this.gr = this.add.graphics()
+    this.gr1 = this.add.graphics()
+    this.gr2 = this.add.graphics()
     this.debug = this.add.graphics().lineStyle(1, 0x000000)
 
-    this.clearText = this.add.text(200, 340, 'LIMPAR', {
+    this.clearTopText = this.add.text(195, 310, 'LIMPAR', {
       backgroundColor: 0x333333,
       padding: 15
     })
       .setOrigin(0.5)
       .setInteractive()
       .on('pointerdown', () => {
-        this.resetGraphics()
+        this.resetTopGraphics()
       })
+
+      this.clearBottomText = this.add.text(195, 560, 'LIMPAR', {
+        backgroundColor: 0x333333,
+        padding: 15
+      })
+        .setOrigin(0.5)
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.resetBottomGraphics()
+        })
 
     this.lastPoint = new Phaser.Math.Vector2(0, 0)
 
     this.createCanvas()
 
-    this.createMesh()
+    this.createTopMesh()
+    this.createBottomMesh()
 
-    this.resetGraphics()
+    this.resetTopGraphics()
+    this.resetBottomGraphics()
   }
 
   createShirts() {
     this.shirtSE = this.add.sprite(603, 230, 'shirt', 32).setScale(5)
     this.shirtL = this.add.sprite(820, 240, 'shirt', 64).setScale(5)
     this.shirtL = this.add.sprite(1020, 240, 'shirt', 16).setScale(5)
+
+    this.shirtNO = this.add.sprite(723, 510, 'shirt', 0).setScale(5)
+    this.shirtN = this.add.sprite(960, 510, 'shirt', 8).setScale(5)
   }
 
-  createMesh() {
-    const vertices = [
-      0, 0, 0,
-      90, 0, 0,
-      0, 130, 0,
-      90, 130, 0
-    ];
-
-    const uvs = [
-      0, 0,
-      1, 0,
-      0, 1,
-      1, 1,
-      0, 0, 0, 0
-    ]
-
-    const uvs2 = [
-      0, 0,
-      0.5, 0,
-      0, 1,
-      0.5, 1,
-      0, 0, 0, 0
-    ]
-
-    const indicies = [1, 2, 0, 3, 2, 1]
-
+  createTopMesh() {
     this.meshSE = this.add.mesh(595, 215)
     let mesh = this.meshSE
-    // // this.meshL.addVertices(vertices, uvs, indicies, true)
     Phaser.Geom.Mesh.GenerateGridVerts({
       mesh,
-      widthSegments: 10,
+      widthSegments: 6,
       flipY: true,
       width: 123,
       height: 123
@@ -90,10 +84,9 @@ export default class Game extends Phaser.Scene {
 
     this.meshL = this.add.mesh(845, 215)
     mesh = this.meshL
-    // this.meshL.addVertices(vertices, uvs, indicies, true)
     Phaser.Geom.Mesh.GenerateGridVerts({
       mesh,
-      widthSegments: 10,
+      widthSegments: 6,
       flipY: true,
       width: 123,
       height: 123
@@ -111,7 +104,7 @@ export default class Game extends Phaser.Scene {
     mesh = this.meshNE
     const grid2 = Phaser.Geom.Mesh.GenerateGridVerts({
       mesh,
-      widthSegments: 10,
+      widthSegments: 6,
       flipY: true,
       width: 123,
       height: 123
@@ -126,45 +119,115 @@ export default class Game extends Phaser.Scene {
     // this.meshNE.setDebug(this.debug)
   }
 
+  createBottomMesh() {
+    this.meshNO = this.add.mesh(708, 480)
+    let mesh = this.meshNO
+    Phaser.Geom.Mesh.GenerateGridVerts({
+      mesh,
+      widthSegments: 6,
+      flipY: true,
+      width: 123,
+      height: 123
+    });
+    this.meshNO.vertices.forEach(vertex => {
+      const distFromCenter = 61.5 - Math.abs(vertex.x)
+      vertex.z = Math.pow(distFromCenter, 0.8)
+      vertex.y -= Math.pow(distFromCenter, 0.5)
+    })
+    this.meshNO.modelRotation.x += 0.1
+    this.meshNO.panZ(300)
+    // this.meshNO.setDebug(this.debug)
+
+    this.meshN = this.add.mesh(935, 475)
+    mesh = this.meshN
+    Phaser.Geom.Mesh.GenerateGridVerts({
+      mesh,
+      widthSegments: 6,
+      flipY: true,
+      width: 123,
+      height: 123
+    });
+    this.meshN.vertices.forEach(vertex => {
+      const distFromCenter = 61.5 - Math.abs(vertex.x)
+      vertex.z = Math.pow(distFromCenter, 0.8)
+      vertex.y -= Math.pow(distFromCenter, 0.5)
+    })
+    this.meshN.panZ(300)
+    this.meshN.modelRotation.y -= 0.6
+    // this.meshN.setDebug(this.debug)
+  }
+
   createCanvas() {
-    this.sensor = this.add.rectangle(150, 150, 90, 130, 0xFFFFFF, 0)
+    this.topSensor = this.add.rectangle(150, 150, 90, 130, 0xFFFFFF, 0)
       .setOrigin(0)
       .setInteractive()
       .setStrokeStyle(1, 0x000000)
 
-    this.sensor.on('pointerdown', (pointer) => {
+    this.topSensor.on('pointerdown', (pointer) => {
       this.drawing = true
-      this.gr.fillCircle(pointer.worldX, pointer.worldY, 2.5)
+      this.gr1.fillCircle(pointer.worldX, pointer.worldY, 2.5)
       this.lastPoint.set(pointer.worldX, pointer.worldY)
     })
 
-    this.sensor.on('pointerup', (pointer) => {
+    this.topSensor.on('pointerup', (pointer) => {
       this.drawing = false
-      this.createTexture()
+      this.createTopTexture()
     })
 
-    this.sensor.on('pointermove', (pointer) => {
+    this.topSensor.on('pointermove', (pointer) => {
       if (!this.drawing) return
 
       if (pointer.worldX === this.lastPoint.x && pointer.worldY === this.lastPoint.y) return
 
       const line = new Phaser.Geom.Line(this.lastPoint.x, this.lastPoint.y, pointer.worldX, pointer.worldY)
-      this.gr.strokeLineShape(line)
-      this.gr.fillCircle(pointer.worldX, pointer.worldY, 2.5)
+      this.gr1.strokeLineShape(line)
+      this.gr1.fillCircle(pointer.worldX, pointer.worldY, 2.5)
       this.lastPoint.set(pointer.worldX, pointer.worldY)
     })
 
-    this.sensor.on('pointerout', (pointer) => {
+    this.topSensor.on('pointerout', (pointer) => {
       this.drawing = false
-      this.createTexture()
+      this.createTopTexture()
+    })
+
+    this.bottomSensor = this.add.rectangle(150, 400, 90, 130, 0xFFFFFF, 0)
+      .setOrigin(0)
+      .setInteractive()
+      .setStrokeStyle(1, 0x000000)
+
+    this.bottomSensor.on('pointerdown', (pointer) => {
+      this.drawing = true
+      this.gr2.fillCircle(pointer.worldX, pointer.worldY, 2.5)
+      this.lastPoint.set(pointer.worldX, pointer.worldY)
+    })
+
+    this.bottomSensor.on('pointerup', (pointer) => {
+      this.drawing = false
+      this.createBottomTexture()
+    })
+
+    this.bottomSensor.on('pointermove', (pointer) => {
+      if (!this.drawing) return
+
+      if (pointer.worldX === this.lastPoint.x && pointer.worldY === this.lastPoint.y) return
+
+      const line = new Phaser.Geom.Line(this.lastPoint.x, this.lastPoint.y, pointer.worldX, pointer.worldY)
+      this.gr2.strokeLineShape(line)
+      this.gr2.fillCircle(pointer.worldX, pointer.worldY, 2.5)
+      this.lastPoint.set(pointer.worldX, pointer.worldY)
+    })
+
+    this.bottomSensor.on('pointerout', (pointer) => {
+      this.drawing = false
+      this.createBottomTexture()
     })
   }
 
-  createTexture() {
-    const rt = this.add.renderTexture(0, 0, this.sensor.width, this.sensor.height)
+  createTopTexture() {
+    const rt = this.add.renderTexture(0, 0, this.topSensor.width, this.topSensor.height)
 
     rt.draw(this.stamp, 5, 20)
-    rt.draw(this.gr, -this.sensor.x, -this.sensor.y)
+    rt.draw(this.gr1, -this.topSensor.x, -this.topSensor.y)
     if (this.textures.exists('draw')) this.textures.remove('draw')
     rt.saveTexture('draw')
     rt.destroy()
@@ -174,12 +237,33 @@ export default class Game extends Phaser.Scene {
     this.meshNE.setTexture('draw')
   }
 
-  resetGraphics() {
-    this.gr
+  createBottomTexture() {
+    const rt = this.add.renderTexture(0, 0, this.topSensor.width, this.topSensor.height)
+
+    rt.draw(this.stamp, 5, 20)
+    rt.draw(this.gr2, -this.bottomSensor.x, -this.bottomSensor.y)
+    if (this.textures.exists('draw2')) this.textures.remove('draw2')
+    rt.saveTexture('draw2')
+    rt.destroy()
+
+    this.meshNO.setTexture('draw2')
+    this.meshN.setTexture('draw2')
+  }
+
+  resetTopGraphics() {
+    this.gr1
       .clear()
       .fillStyle(0x000000).lineStyle(5, 0x000000)
 
-    this.createTexture()
+    this.createTopTexture()
+  }
+
+  resetBottomGraphics() {
+    this.gr2
+      .clear()
+      .fillStyle(0x000000).lineStyle(5, 0x000000)
+
+    this.createBottomTexture()
   }
 
 }
