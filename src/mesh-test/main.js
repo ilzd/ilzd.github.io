@@ -1,10 +1,10 @@
-import Phaser from './lib/phaser.js'
+import phaser from '../lib/phaser.js'
 import Game from './scenes/game.js'
 
 export default new Phaser.Game({
   type: Phaser.WEBGL,
-  width: 1100,
-  height: 700,
+  width: 2000,
+  height: 2000,
   transparent: true,
   scene: [Game]
 })
