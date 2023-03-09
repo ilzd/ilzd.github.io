@@ -23,6 +23,12 @@ export default class Game extends Phaser.Scene {
     this.gr2 = this.add.graphics()
     this.debug = this.add.graphics().lineStyle(1, 0x000000)
 
+    this.topLabel = this.add.text(195, 130, 'FRONTAL', {
+      color: 0x444444,
+      fontSize: 22
+    })
+      .setOrigin(0.5)
+
     this.clearTopText = this.add.text(195, 310, 'LIMPAR', {
       backgroundColor: 0x333333,
       padding: 15
@@ -33,15 +39,21 @@ export default class Game extends Phaser.Scene {
         this.resetTopGraphics()
       })
 
-      this.clearBottomText = this.add.text(195, 560, 'LIMPAR', {
-        backgroundColor: 0x333333,
-        padding: 15
+    this.bottomLabel = this.add.text(195, 380, 'TRASEIRO', {
+      color: 0x444444,
+      fontSize: 22
+    })
+      .setOrigin(0.5)
+
+    this.clearBottomText = this.add.text(195, 560, 'LIMPAR', {
+      backgroundColor: 0x333333,
+      padding: 15
+    })
+      .setOrigin(0.5)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.resetBottomGraphics()
       })
-        .setOrigin(0.5)
-        .setInteractive()
-        .on('pointerdown', () => {
-          this.resetBottomGraphics()
-        })
 
     this.lastPoint = new Phaser.Math.Vector2(0, 0)
 
@@ -138,7 +150,7 @@ export default class Game extends Phaser.Scene {
     this.meshNO.panZ(300)
     // this.meshNO.setDebug(this.debug)
 
-    this.meshN = this.add.mesh(935, 475)
+    this.meshN = this.add.mesh(940, 480)
     mesh = this.meshN
     Phaser.Geom.Mesh.GenerateGridVerts({
       mesh,
@@ -153,7 +165,8 @@ export default class Game extends Phaser.Scene {
       vertex.y -= Math.pow(distFromCenter, 0.5)
     })
     this.meshN.panZ(300)
-    this.meshN.modelRotation.y -= 0.6
+    this.meshN.modelRotation.y -= 0.4
+    this.meshN.modelRotation.x += 0.2
     // this.meshN.setDebug(this.debug)
   }
 
