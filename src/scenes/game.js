@@ -42,7 +42,8 @@ export default class GameScene extends Phaser.Scene {
     this.walking = false
     this.dist = 0
     this.moveSpeed = 100
-    this.userPath=[]
+    this.selectedDir = 1
+    this.userPath = []
     this.arrows
     this.pathArrows
     this.running = false
@@ -57,9 +58,18 @@ export default class GameScene extends Phaser.Scene {
     this.buildReward()
     this.buildAnimations()
     this.buildCharacter()
-    this.buildInterface()
+    // this.buildInterface()
 
-    this.cameras.main.centerOn(0, 250)
+    this.updateCamera()
+    this.scale.on(Phaser.Scale.Events.RESIZE, () => {
+      this.updateCamera()
+    })
+
+    window.phaserClear = () => this.clearPath()
+    window.phaserWalk = () => this.walk()
+    window.phaserRight = () => this.turnRight()
+    window.phaserLeft = () => this.turnLeft()
+    window.phaserRun = () => this.run()
   }
 
   update(time, delta) {
@@ -90,10 +100,36 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
+  updateCamera() {
+    const wRatio = this.scale.gameSize.width / 640
+    const hRatio = this.scale.gameSize.height / 640
+    const ration = Math.min(wRatio, hRatio)
+    this.cameras.main.centerOn(0, 140)
+    this.cameras.main.setZoom(ration)
+  }
+
+  turnRight() {
+    if(this.running) return
+    this.selectedDir++
+    if (this.selectedDir === this.dirs.length) his.selectedDir = 0
+  }
+
+  turnLeft() {
+    if(this.running) return
+    this.selectedDir--
+    if (this.selectedDir === -1) this.selectedDir = this.dirs.length - 1
+  }
+
+  walk() {
+    if (this.running) return
+    this.addToPath(this.dirs[this.selectedDir])
+  }
+
   reset() {
     this.walking = false
     this.running = false
     this.pathPos = 0
+    this.selectedDir = 1
     this.buildCharacter()
   }
 
@@ -161,13 +197,13 @@ export default class GameScene extends Phaser.Scene {
   addToPath(dir) {
     if (this.running) return
     this.userPath.push(dir)
-    this.buildPathArrows()
+    // this.buildPathArrows()
   }
 
   clearPath() {
     if (this.running) return
     this.userPath = []
-    this.buildPathArrows()
+    // this.buildPathArrows()
   }
 
   eraseLast() {

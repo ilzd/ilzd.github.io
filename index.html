@@ -1,15 +1,49 @@
 <html>
 
 <head>
+  <script src="https://unpkg.com/blockly/blockly.min.js"></script>
   <script src="src/phaser.js"></script>
   <script type="module" src="src/main.js"></script>
+  <style>
+    body {
+      margin: 0;
+    }
+    #mini-game {
+      display: flex;
+    }
+    #blockly {
+      width: 40%;
+      min-height: 100vh;
+    }
+    #phaser {
+      width: 60%;
+      min-height: 100vh;
+    } 
+    #run {
+      position: absolute;
+      left: 10;
+      bottom: 10;
+      font-size: x-large;
+      color: black;
+      background-color: gray;
+      padding: 12;
+      border-radius: 10px;
+      z-index: 30;
+    } 
+    #run:hover {
+      background-color: darkgrey; 
+      cursor: pointer;
+    } 
+  </style>
 </head>
 
 <body>
+  <div id="mini-game">
+    <div id="blockly">
+    </div>
+    <div id="phaser"></div>
+  </div>
+  <p id="run">Executar</p>
 </body>
-
-</html>
-
-</html>
 
 </html>
