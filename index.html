@@ -1,49 +1,89 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-  <script src="https://unpkg.com/blockly/blockly.min.js"></script>
-  <script src="src/phaser.js"></script>
-  <script type="module" src="src/main.js"></script>
+  <title>Rota Programada</title>
   <style>
     body {
       margin: 0;
+      font-size: 0;
     }
+
     #mini-game {
       display: flex;
+      flex-direction: row;
+      height: 100vh;
     }
+
+    #code {
+      min-width: 0;
+      width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
     #blockly {
-      width: 40%;
-      min-height: 100vh;
+      height: 100%;
+      position: relative;
     }
-    #phaser {
-      width: 60%;
-      min-height: 100vh;
-    } 
-    #run {
+
+    #blocklyArea {
       position: absolute;
-      left: 10;
-      bottom: 10;
-      font-size: x-large;
-      color: black;
-      background-color: gray;
-      padding: 12;
-      border-radius: 10px;
-      z-index: 30;
-    } 
-    #run:hover {
-      background-color: darkgrey; 
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    #run-code {
+      background-color: lightblue;
+      margin: 0;
+      padding: 12px;
+      text-align: center;
+      font-size: large;
+      font-weight: bold;
       cursor: pointer;
-    } 
+      font-family: Verdana, Geneva, Tahoma, sans-serif
+    }
+
+    #block-limit {
+      background-color: #BB9999;
+      margin: 0;
+      padding: 8px;
+      text-align: center;
+      font-size: medium;
+      display: none;
+      font-family: Verdana, Geneva, Tahoma, sans-serif
+    }
+
+    #run-code:hover {
+      background-color: darkturquoise;
+    }
+
+    #phaser {
+      width: 100%;
+    }
+
+    #phaser canvas {
+      max-width: 100%;
+    }
   </style>
+  <script src="src/lib/acorn_interpreter.js"></script>
+  
+  <script type="module" crossorigin src="/assets/index.74f18af8.js"></script>
 </head>
 
 <body>
   <div id="mini-game">
-    <div id="blockly">
+    <div id="code">
+      <p id="run-code">EXECUTAR</p>
+      <p id="block-limit"></p>
+      <div id="blockly">
+        <div id="blocklyArea"></div>
+      </div>
     </div>
     <div id="phaser"></div>
   </div>
-  <p id="run">Executar</p>
 </body>
 
 </html>
