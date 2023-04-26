@@ -2,88 +2,23 @@
 <html>
 
 <head>
-  <title>Rota Programada</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piquenique</title>
+
   <style>
     body {
       margin: 0;
       font-size: 0;
     }
-
-    #mini-game {
-      display: flex;
-      flex-direction: row;
-      height: 100vh;
-    }
-
-    #code {
-      min-width: 0;
-      width: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #blockly {
-      height: 100%;
-      position: relative;
-    }
-
-    #blocklyArea {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-
-    #run-code {
-      background-color: lightblue;
-      margin: 0;
-      padding: 12px;
-      text-align: center;
-      font-size: large;
-      font-weight: bold;
-      cursor: pointer;
-      font-family: Verdana, Geneva, Tahoma, sans-serif
-    }
-
-    #block-limit {
-      background-color: #BB9999;
-      margin: 0;
-      padding: 8px;
-      text-align: center;
-      font-size: medium;
-      display: none;
-      font-family: Verdana, Geneva, Tahoma, sans-serif
-    }
-
-    #run-code:hover {
-      background-color: darkturquoise;
-    }
-
-    #phaser {
-      width: 100%;
-    }
-
-    #phaser canvas {
-      max-width: 100%;
-    }
   </style>
-  <script src="acorn_interpreter.js"></script>
   
-  <script type="module" crossorigin src="/assets/index.095fc13a.js"></script>
+  <script type="module" crossorigin src="/assets/index.b12913cb.js"></script>
 </head>
 
 <body>
-  <div id="mini-game">
-    <div id="code">
-      <p id="run-code">EXECUTAR</p>
-      <p id="block-limit"></p>
-      <div id="blockly">
-        <div id="blocklyArea"></div>
-      </div>
-    </div>
-    <div id="phaser"></div>
-  </div>
+  <div id="phaser"></div>
 </body>
 
 </html>

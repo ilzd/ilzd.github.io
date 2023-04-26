@@ -1,0 +1,147 @@
+{
+  "menu": {},
+  "board": {
+    "feed": {
+      "startMatch": "A partida está começando, preparem-se.",
+      "endMatch": "Fim da partida.",
+      "playerTurn": "Agora é a vez do jogador %name.",
+      "playerRolled": "%name jogou o dado e tirou %dice.",
+      "playing": "%name está jogando.",
+      "endTurn": "Fim do turno.",
+      "playerCreditsGain": "%name recebeu $ %credits.",
+      "playerCreditsLoss": "%name pagou $ %credits."
+    }
+  },
+  "dice": {
+    "rollTheDice": "Clique para lançar dados",
+    "waitingDiceRoll": "Aguardando outro jogador"
+  },
+  "cards": {
+    "receive": "Receba $ %credits",
+    "pay": "Pague $ %credits",
+    "walkAhead": "Avance %displacement casas",
+    "walkBack": "Recue %displacement casas",
+    "or": "Ou",
+    "luckCards": {
+      "1": {
+        "title": "Lâmpadas Econômicas",
+        "description": "Você instalou lâmpadas econômicas e poupou."
+      },
+      "2": {
+        "title": "Chegou a conta de luz!",
+        "description": ""
+      },
+      "3": {
+        "title": "Chegou a conta de telefone!",
+        "description": ""
+      },
+      "4": {
+        "title": "O aluguel venceu!",
+        "description": ""
+      },
+      "6": {
+        "title": "Você economizou água!",
+        "description": ""
+      },
+      "7": {
+        "title": "Você reciclou o lixo!",
+        "description": ""
+      },
+      "8": {
+        "title": "Você se machucou!",
+        "description": "Faça um curativo."
+      },
+      "9": {
+        "title": "Você ajudou nas tarefas domésticas!",
+        "description": ""
+      },
+      "10": {
+        "title": "Você desperdiçou comida!",
+        "description": ""
+      },
+      "11": {
+        "title": "Você foi premiado no concurso de redação!",
+        "description": ""
+      },
+      "12": {
+        "title": "O pneu furou!",
+        "description": ""
+      },
+      "13": {
+        "title": "Você economizou!",
+        "description": "Planejou bem suas compras."
+      }
+    },
+    "decisionCards": {
+      "4": {
+        "title": "Vá ao parque!",
+        "options": [
+          {
+            "description": "Vá de carro."
+          },
+          {
+            "description": "Vá de bibicleta."
+          }
+        ]
+      },
+      "6": {
+        "title": "Oportunidade",
+        "options": [
+          {
+            "description": ""
+          },
+          {
+            "description": ""
+          }
+        ]
+      },
+      "7": {
+        "title": "Vá ao parque!",
+        "options": [
+          {
+            "description": "Vá de ônibus."
+          },
+          {
+            "description": "Vá a pé."
+          }
+        ]
+      },
+      "8": {
+        "title": "Oportunidade",
+        "options": [
+          {
+            "description": ""
+          },
+          {
+            "description": ""
+          }
+        ]
+      }
+    }
+  },
+  "items": {
+    "selectItemsTitle": "Selecione quatro itens para levar ao piquenique",
+    "purchaseItemsTitle": "Compre os itens que você se comprometeu a levar",
+    "balance": "Saldo: $ %credits",
+    "confirm": "Confirmar",
+    "totalPrice": "Preço total",
+    "names": {
+      "0": "Água de côco",
+      "1": "Água mineral",
+      "2": "Banana",
+      "3": "Batata frita",
+      "4": "Bolacha recheada",
+      "5": "Bolo de cenoura",
+      "6": "Chocolate",
+      "7": "Iogurte de polpa",
+      "8": "Maçã",
+      "9": "Pão de queijo",
+      "10": "Pastel",
+      "11": "Pipoca",
+      "12": "Refrigerante",
+      "13": "Sanduíche",
+      "14": "Suco de laranja",
+      "15": "Tapioca"
+    }
+  }
+}
