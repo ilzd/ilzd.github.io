@@ -1,5 +1,8 @@
 {
-  "menu": {},
+  "menu": {
+    "startGame": "Iniciar partida",
+    "players": "Lista de Jogadores"
+  },
   "board": {
     "feed": {
       "startMatch": "A partida está começando, preparem-se.",
@@ -9,20 +12,28 @@
       "playing": "%name está jogando.",
       "endTurn": "Fim do turno.",
       "playerCreditsGain": "%name recebeu $ %credits.",
-      "playerCreditsLoss": "%name pagou $ %credits."
+      "playerCreditsLoss": "%name pagou $ %credits.",
+      "playerCreditsGainFrom": "%name recebeu $ %credits de %from.",
+      "playerCreditsLossTo": "%name pagou $ %credits para %from."
     }
   },
   "dice": {
     "rollTheDice": "Clique para lançar dados",
-    "waitingDiceRoll": "Aguardando outro jogador"
+    "waitingDiceRoll": "Aguardando outro jogador",
+    "timeRemaining": "%seconds segundos restantes"
   },
   "cards": {
     "receive": "Receba $ %credits",
     "pay": "Pague $ %credits",
     "walkAhead": "Avance %displacement casas",
     "walkBack": "Recue %displacement casas",
+    "selectPlayer": "Escolha um jogador",
     "or": "Ou",
     "luckCards": {
+      "0": {
+        "title": "Gentileza",
+        "description": "Você fez uma boa ação e foi reconhecido. Escolha um jogador e receba dele."
+      },
       "1": {
         "title": "Lâmpadas Econômicas",
         "description": "Você instalou lâmpadas econômicas e poupou."
@@ -38,6 +49,10 @@
       "4": {
         "title": "O aluguel venceu!",
         "description": ""
+      },
+      "5": {
+        "title": "Convide um amigo para o piquenique!",
+        "description": "Escolha um jogador e pague para ele."
       },
       "6": {
         "title": "Você economizou água!",
@@ -70,9 +85,24 @@
       "13": {
         "title": "Você economizou!",
         "description": "Planejou bem suas compras."
+      },
+      "14": {
+        "title": "Você foi ao piquenique com um amigo!",
+        "description": "Escolha um jogador e vá para a mesma casa que ele."
       }
     },
     "decisionCards": {
+      "1": {
+        "title": "Aproveite!",
+        "options": [
+          {
+            "description": "Compre um refrigerante pela metade do preço."
+          },
+          {
+            "description": "Compre um suco de laranja pela metade do preço."
+          }
+        ]
+      },
       "4": {
         "title": "Vá ao parque!",
         "options": [
@@ -113,7 +143,18 @@
             "description": ""
           },
           {
-            "description": ""
+            "description": "Ganhe uma maçã"
+          }
+        ]
+      },
+      "9": {
+        "title": "Aproveite",
+        "options": [
+          {
+            "description": "Compre um pastel pela metade do preço."
+          },
+          {
+            "description": "Compre uma água de coco pela metade do preço."
           }
         ]
       }
